@@ -1,0 +1,6 @@
+__pycache__
+ansible.cfg
+ansible_modules_shipilovds_workstation.egg-info
+build
+dist
+*.tar.gz

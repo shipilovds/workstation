@@ -1,0 +1,70 @@
+{% macro Parameter(parameter, type, required) -%}
+**{{ parameter }}**<br>{{ type }}
+{%- if required %} / *required*{% endif -%}
+{%- endmacro -%}
+
+{%- macro Choices(choices, default) -%}
+  {%- if default is none -%}
+    {%- set default = 'null' -%}
+  {%- endif -%}
+  {%- if choices -%}
+    **Choices:**<br>
+    {%- set _processed_choices = [] %}
+    {%- for _item in choices -%}
+      {%- if _item is none -%}
+        {%- set _item = 'null' -%}
+      {%- endif -%}
+      {%- if _item != default -%}
+        {% set _choice = '* ' + _item|string %}
+      {%- else -%}
+        {% set _choice = '* **' + _item|string + ' ←** (default)' %}
+      {%- endif -%}
+      {%- set _processed_choices = _processed_choices.append(_choice) %}
+    {%- endfor -%}
+    {{ _processed_choices | join('<br>') }}
+  {%- endif -%}
+  {%- if default and not choices -%}
+    **Default: "{{ default }}"**
+  {%- endif -%}
+{%- endmacro -%}
+# {{ full_module_name }} - {{ documentation.short_description }}
+
+## Synopsis
+
+{% for _line in documentation.description -%}
+{{ _line }}
+
+{% endfor -%}
+## Parameters
+
+|      Parameter       |       Comments       |
+|----------------------|----------------------|
+{% for _parameter in documentation.options -%}
+| {{ Parameter(_parameter, documentation.options[_parameter].type, documentation.options[_parameter].required) }} | {{ documentation.options[_parameter].description | join('<br>') }}<br>{{ Choices(documentation.options[_parameter].choices, documentation.options[_parameter].default) }} |
+{% endfor %}
+
+{% if documentation.notes -%}
+## Notes
+
+{% for _note in documentation.notes -%}
+> * {{ _note }}
+{% endfor %}
+{% endif -%}
+
+## Examples
+
+```yaml
+{{ doc_examples }}
+```
+
+{% if doc_return is not none -%}
+## Return Values
+
+{{ doc_return }}
+{%- endif -%}
+{#- TODO: Make 'Return Values' block viable (when non-empty 'doc_return' appears in my modules) -#}
+
+## Authors
+{% for _author in documentation.author -%}
+ * {{ _author }}
+{% endfor -%}

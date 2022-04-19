@@ -1,0 +1,33 @@
+---
+namespace: 'shipilovds'
+name: 'workstation'
+version: '1.0.0'
+readme: 'README.md'
+authors:
+  - 'Denis Shipilov @shipilovds <shipilovds@gmail.com>'
+description: 'Collection with usefull modules for workstation'
+license:
+  - 'GPL-3.0-or-later'
+tags:
+  - linux
+  - workstation
+  - gnome
+  - collection
+homepage: "https://www.github.com/shipilovds/workstation"
+repository: "https://www.github.com/shipilovds/workstation"
+documentation: "https://www.github.com/shipilovds/workstation"
+issues: "https://www.github.com/shipilovds/workstation/issues"
+build_ignore:
+  - 'ansible.cfg'
+  - 'ansible_collections'
+  - 'ansible_modules_shipilovds_workstation.egg-info'
+  - 'build'
+  - 'dist'
+  - 'docs'
+  - 'helpers'
+  - 'Makefile'
+  - 'requirements.txt'
+  - 'setup.py'
+  - '.yamllint'
+  - '.flake8'
+  - '.gitignore'

@@ -10,13 +10,13 @@ This colection created to store some modules I wrote to setup my workstation.
 
 | Name | Description |
 |------|-------------|
-| [shipilovds.workstation.gsettings](https://github.com/shipilovds/workstation/docs/shipilovds.workstation.gsettings.md) | Gnome applications settings management |
-| [shipilovds.workstation.gnome_extension](https://github.com/shipilovds/workstation/docs/shipilovds.workstation.gnome_extension.md) | Gnome shell extensions management |
+| [shipilovds.workstation.gsettings](https://github.com/shipilovds/workstation/blob/main/docs/shipilovds.workstation.gsettings.md) | Gnome applications settings management |
+| [shipilovds.workstation.gnome_extension](https://github.com/shipilovds/workstation/blob/main/docs/shipilovds.workstation.gnome_extension.md) | Gnome shell extensions management |
 
 > NOTE: I`ve made some cool stuff to make "[docs.ansible.com](https://docs.ansible.com/ansible/latest/)"-like modules documentation. Generated pages you can find on the links above.
 > Template file and tool itself:
-> * [Template](https://github.com/shipilovds/workstation/helpers/docs_template.j2)
-> * [Tool](https://github.com/shipilovds/workstation/helpers/generate_md_docs.py)
+> * [Template](https://github.com/shipilovds/workstation/blob/main/helpers/docs_template.j2)
+> * [Tool](https://github.com/shipilovds/workstation/blob/main/helpers/generate_md_docs.py)
 
 ## Ansible version compatibility
 

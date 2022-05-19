@@ -1,7 +1,7 @@
 ---
 namespace: 'shipilovds'
 name: 'workstation'
-version: '1.0.1'
+version: '1.0.2'
 readme: 'README.md'
 authors:
   - 'Denis Shipilov @shipilovds <shipilovds@gmail.com>'

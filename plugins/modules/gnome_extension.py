@@ -203,10 +203,15 @@ class GnomeExtension():
         installed = False
         installed_extensions = []
         for src in GNOME_EXTENSION_DIRS:
-            src = expanduser(src)
-            for item in listdir(src):
-                if isdir(join(src, item)):
-                    installed_extensions.append(item)
+            try:
+                src = expanduser(src)
+                for item in listdir(src):
+                    if isdir(join(src, item)):
+                        installed_extensions.append(item)
+            except FileNotFoundError:
+                # It means that local user extensions does not exist yet
+                # A little dirty hack: do nothing here
+                pass
         if self.uuid in installed_extensions:
             installed = True
 

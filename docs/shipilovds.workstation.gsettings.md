@@ -32,13 +32,10 @@ Module to set gsettings options
     gsettings:
       org.gnome.desktop.wm.keybindings:
         keys:
-          switch-input-source:
-          - <Alt>Shift_L
+          switch-input-source: [<Alt>Shift_L]
       org.gnome.desktop.input-sources:
         keys:
-          sources:
-          - ('xkb', 'us')
-          - ('xkb', 'ru')
+          sources: ['(xkb, us)', '(xkb, ru)']
       org.gtk.Settings.FileChooser:
         keys:
           location-mode: filename-entry

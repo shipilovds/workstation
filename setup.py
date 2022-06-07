@@ -10,7 +10,7 @@ from shutil import copyfile
 with open('galaxy.yml', 'r') as data:
     galaxy = yaml.safe_load(data)
 
-collection_path = 'ansible_collections/{}/{}'.format(galaxy['namespace'], galaxy['name'])
+collection_path = f"ansible_collections/{galaxy['namespace']}/{galaxy['name']}"
 long_description = open(galaxy['readme'], 'r').read()
 
 extra_files = [
@@ -47,7 +47,7 @@ class BuildCommand(build_py):
 
 
 setup(
-    name='ansible-modules-{}-{}'.format(galaxy['namespace'], galaxy['name']),
+    name=f"ansible-modules-{galaxy['namespace']}-{galaxy['name']}",
     version=galaxy['version'],
     description=galaxy['description'],
     author=", ".join(galaxy['authors']),

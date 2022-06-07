@@ -56,13 +56,10 @@ EXAMPLES = r'''
     gsettings:
       org.gnome.desktop.wm.keybindings:
         keys:
-          switch-input-source:
-            - '<Alt>Shift_L'
+          switch-input-source: ['<Alt>Shift_L']
       org.gnome.desktop.input-sources:
         keys:
-          sources:
-            - ('xkb', 'us')
-            - ('xkb', 'ru')
+          sources: ['(xkb, us)', '(xkb, ru)']
       org.gtk.Settings.FileChooser:
         keys:
           location-mode: 'filename-entry'
@@ -113,10 +110,7 @@ def main():
         gsettings = GsettingsWrapper(schema_id, schema_path, schema_key)
     except Exception as ex:
         module.fail_json(msg=str(ex), **result)
-    schema_current_value = gsettings.read().unpack()
-    if type(schema_current_value) != type(schema_eventual_value):
-        module.fail_json(msg='Type of the current value does not match with the value you are trying to set!', **result)
-    if schema_current_value != schema_eventual_value and not module.check_mode:
+    if gsettings.value.unpack() != schema_eventual_value and not module.check_mode:
         try:
             gsettings.write(schema_eventual_value)
             result['changed'] = True

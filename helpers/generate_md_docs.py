@@ -47,7 +47,7 @@ def import_var_as_yaml(module, var, yml):
     Helps to get module by name and extract yaml documentation blocks
     Returns yaml obj.
     """
-    modpath = "{}.{}".format(MODULES_PATH.replace('/', '.'), module)
+    modpath = f"{MODULES_PATH.replace('/', '.')}.{module}"
     module_imported = importlib.import_module(modpath)
     content = getattr(module_imported, var)
 
@@ -77,8 +77,8 @@ for module in get_modules_list():
     # Why don't we get namespace and collection name from galaxy config?:)
     with open('galaxy.yml', 'r') as data:
         galaxy = yml.load(data)
-    full_module_name = '{}.{}.{}'.format(galaxy['namespace'], galaxy['name'], module)
-    module_readme_file = '{}/{}.md'.format(DOCS_PATH, full_module_name)
+    full_module_name = f"{galaxy['namespace']}.{galaxy['name']}.{module}"
+    module_readme_file = f"{DOCS_PATH}/{full_module_name}.md"
 
     with open(module_readme_file, 'w') as readme:
         readme.write(template.render(

@@ -113,7 +113,7 @@ class GnomeExtension():
     '''Class that helps to operate with Gnome Shell Extension.
 
     Args:
-        uuid (str): Extension name (uuid)
+        name (str): Extension name (uuid)
         src (:obj:`str`, optional): Path of a bundle (might be None)
         force (bool): `True` if force installation, `False` if not
         state (str): `present` or `absent`
@@ -242,7 +242,7 @@ class GnomeExtension():
             self.result['operations'][operation[0]]['rc'] = rc
             match = re.search(to_text('exists and --force was not specified'), stderr)
             if rc != 0 and match is None:
-                msg = 'Gnome Extension Executable Error: {}'.format(stderr)
+                msg = f'Gnome Extension Executable Error: {stderr}'
                 self.result.update({'failed': True, 'msg': msg})
 
     def change_state(self, ansible_module):

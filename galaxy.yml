@@ -1,18 +1,22 @@
 ---
 namespace: 'shipilovds'
 name: 'workstation'
-version: '1.0.2'
+version: '1.0.3'
 readme: 'README.md'
 authors:
   - 'Denis Shipilov @shipilovds <shipilovds@gmail.com>'
-description: 'Collection with usefull modules for workstation'
+description: 'Collection of useful modules for Gnome workstation'
 license:
   - 'GPL-3.0-or-later'
 tags:
+  - collection
+  - desktop
+  - extensions
+  - gnome
+  - gnomeshell
+  - gsettings
   - linux
   - workstation
-  - gnome
-  - collection
 homepage: "https://www.github.com/shipilovds/workstation"
 repository: "https://www.github.com/shipilovds/workstation"
 documentation: "https://www.github.com/shipilovds/workstation"

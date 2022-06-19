@@ -1,0 +1,29 @@
+---
+- name: 'SSH : Set .ssh directory mode'
+  file:
+    path: "/home/{{ tools_user_name }}/.ssh"
+    state: directory
+    mode: u=rwx,g=,o=
+  changed_when: False
+  tags: ['ssh']
+
+- name: 'SSH : Add autorized ssh key'
+  authorized_key:
+    user: "{{ tools_user_name }}"
+    key: "{{ tools_user_pubkey }}"
+    state: present
+  tags: ['ssh']
+
+- name: 'SSH : Add private key file'
+  copy:
+    dest: "/home/{{ tools_user_name }}/.ssh/{{ tools_user_privkey_filename }}"
+    content: "{{ tools_user_privkey }}"
+    mode: u=rw,g=,o=
+  tags: ['ssh']
+
+- name: 'SSH : Add public key file'
+  copy:
+    dest: "/home/{{ tools_user_name }}/.ssh/{{ tools_user_privkey_filename }}.pub"
+    content: "{{ tools_user_pubkey }}"
+    mode: u=rw,g=,o=
+  tags: ['ssh']

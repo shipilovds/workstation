@@ -1,0 +1,12 @@
+---
+- name: Gnome Shell Extensions management
+  include_tasks: extensions.yml
+  tags: ['gnome_extensions']
+
+- name: Gsettings management
+  include_tasks: gsettings.yml
+  loop: "{{ gnome_gsettings | dict2items }}"
+  loop_control:
+    loop_var: _schema
+    label: "{{ _schema.key }}"
+  tags: ['gsettings']

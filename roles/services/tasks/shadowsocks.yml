@@ -1,0 +1,31 @@
+---
+- name: 'Shadowsocks : Install shadowsocks client'
+  include_role:
+    name: pkgs
+    tasks_from: pip.yml
+    apply:
+      tags: ['shadowsocks', 'ss']
+  vars:
+    pkgs_pip_packages:
+      - "{{ services_shadowsocks_pip_pkg }}"
+  tags: ['shadowsocks', 'ss']
+
+- name: 'Shadowsocks : Install generated conf'
+  copy:
+    content: "{{ services_shadowsocks_conf }}"
+    dest: /etc/shadowsocks.json
+  tags: ['shadowsocks', 'ss']
+
+- name: 'Shadowsocks : Install service file'
+  copy:
+    src: 'shadowsocks.service'
+    dest: '/etc/systemd/system/shadowsocks.service'
+  tags: ['shadowsocks', 'ss']
+
+- name: 'Shadowsocks : Make shure that service is running'
+  systemd:
+    name: shadowsocks
+    state: started
+    enabled: True
+    daemon_reload: True
+  tags: ['shadowsocks', 'ss']

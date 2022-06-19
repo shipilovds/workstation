@@ -1,0 +1,9 @@
+---
+- name: "Gsettings : Setup '{{ _schema.key }}'"
+  shipilovds.workstation.gsettings:
+    schema: "{{ _schema.key }}"
+    path: "{{ _schema.value['path'] | default(omit) }}"
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  loop: "{{ _schema.value['keys'] | dict2items }}"
+  tags: ['gsettings']

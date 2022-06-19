@@ -1,0 +1,28 @@
+---
+- name: Setup SSH
+  include_tasks: ssh.yml
+  tags: ['ssh']
+
+- name: Setup Oh My Zsh
+  include_tasks: ohmyzsh.yml
+  tags: ['ohmyzsh']
+
+- name: Setup NeoVim
+  include_tasks: neovim.yml
+  tags: ['neovim', 'nvim']
+
+- name: Setup Tmux
+  include_tasks: tmux.yml
+  tags: ['tmux']
+
+- name: Setup Yamllint
+  include_tasks: yamllint.yml
+  tags: ['yamllint', 'lint']
+
+- name: Setup Git Credentials
+  include_tasks: git.yml
+  tags: ['credentials', 'git']
+
+- name: Setup PyPi Credentials
+  include_tasks: pypi.yml
+  tags: ['credentials', 'pypi']

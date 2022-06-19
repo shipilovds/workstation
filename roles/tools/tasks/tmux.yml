@@ -1,0 +1,24 @@
+---
+- name: 'Tmux : Install system packages'
+  include_role:
+    name: pkgs
+    tasks_from: dnf.yml
+    apply:
+      tags: ['tmux']
+  vars:
+    pkgs_dnf_packages: "{{ tools_tmux_pkgs }}"
+  tags: ['tmux']
+
+- name: 'Tmux : Install config file'
+  get_url:
+    url: "{{ tools_tmux_config_url }}"
+    dest: ~/.tmux.conf
+  tags: ['tmux']
+
+- name: 'Tmux : Install utility for status panel'
+  get_url:
+    url: https://gist.githubusercontent.com/shipilovds/c58ad1e0b267bf29c1b90ade28b0171b/raw/97da93020ca9817d46aa5daa5c6da95d2e6b0f37/cpum.py
+    dest: /usr/bin/cpum
+    mode: u=rwx,g=rx,o=rx
+  become: True
+  tags: ['tmux']

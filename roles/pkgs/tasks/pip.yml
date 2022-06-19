@@ -1,0 +1,6 @@
+---
+- name: 'PIP : Install packages'
+  become: True
+  pip:
+    name: "{{ pkgs_pip_packages }}"
+  tags: ['pip']

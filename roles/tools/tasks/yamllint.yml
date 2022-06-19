@@ -1,0 +1,22 @@
+---
+- name: 'Yamllint : Install system packages'
+  include_role:
+    name: pkgs
+    tasks_from: dnf.yml
+    apply:
+      tags: ['yamllint', 'lint']
+  vars:
+    pkgs_dnf_packages: "{{ tools_yamllint_pkgs }}"
+  tags: ['yamllint', 'lint']
+
+- name: 'Yamllint : Create config dir'
+  file:
+    path: ~/.config/yamllint
+    state: directory
+  tags: ['yamllint', 'lint']
+
+- name: 'Yamllint : Install config file'
+  get_url:
+    url: https://gist.githubusercontent.com/shipilovds/81d6e9e731eee68aa9f4dcfc171b74e5/raw/283ba588f687d30ec107393ce69063250225e426/yamllint.conf
+    dest: ~/.config/yamllint/config
+  tags: ['yamllint', 'lint']

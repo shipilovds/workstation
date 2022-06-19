@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  role_name: tools
+  author: Denis Shipilov <shipilovds@gmail.com>
+  description: Helps to setup a set of various tools.
+  platforms:
+    - name: Fedora
+      versions:
+        - 36
+  galaxy_tags:
+    - ssh
+    - ohmyzsh
+    - neovim
+    - tmux
+    - yamllint
+    - git
+    - pypi

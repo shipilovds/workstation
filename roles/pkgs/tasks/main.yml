@@ -1,0 +1,8 @@
+---
+- name: Install dnf packages
+  include_tasks: dnf.yml
+  tags: ['dnf']
+
+- name: Install pip packages
+  include_tasks: pip.yml
+  tags: ['pip']

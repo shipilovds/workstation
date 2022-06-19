@@ -1,0 +1,11 @@
+---
+- name: 'Git : Ensure that required global options for ~/.gitconfig is set'
+  community.general.git_config:
+    name: "{{ _option.key }}"
+    value: "{{ _option.value }}"
+    scope: global
+  loop: "{{ tools_git_config_settings | dict2items }}"
+  loop_control:
+    loop_var: _option
+    label: "{{ _option.key }}: {{ _option.value }}"
+  tags: ['credentials', 'git']

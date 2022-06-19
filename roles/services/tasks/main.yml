@@ -1,0 +1,8 @@
+---
+- name: Setup Shadowsocks Client
+  include_tasks:
+    file: shadowsocks.yml
+    apply:
+      become: True
+  when: services_shadowsocks_conf
+  tags: ['shadowsocks', 'ss']

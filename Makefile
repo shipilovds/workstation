@@ -2,7 +2,7 @@
 
 NAMESPACE = shipilovds
 NAME = workstation
-VERSION = 1.0.3
+VERSION = 1.1.0
 
 
 lint:
@@ -47,7 +47,7 @@ pip-uninstall:
 
 galaxy-build: $(NAMESPACE)-$(NAME)-$(VERSION).tar.gz
 
-galaxy-install: $(NAMESPACE)-$(NAME)-$(VERSION).tar.gz
+galaxy-install: clean galaxy-uninstall $(NAMESPACE)-$(NAME)-$(VERSION).tar.gz
 	ansible-galaxy collection install $(NAMESPACE)-$(NAME)-$(VERSION).tar.gz
 
 galaxy-uninstall:

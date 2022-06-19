@@ -1,0 +1,12 @@
+---
+galaxy_info:
+  role_name: pkgs
+  author: Denis Shipilov <shipilovds@gmail.com>
+  description: Helps to install system pkgs.
+  platforms:
+    - name: Fedora
+      versions:
+        - 36
+  galaxy_tags:
+    - pip
+    - dnf

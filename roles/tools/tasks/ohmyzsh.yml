@@ -1,0 +1,39 @@
+---
+- name: 'OhMyZsh : Install system packages'
+  include_role:
+    name: pkgs
+    tasks_from: dnf.yml
+    apply:
+      tags: ['ohmyzsh']
+  vars:
+    pkgs_dnf_packages: "{{ tools_ohmyzsh_pkgs }}"
+  tags: ['ohmyzsh']
+
+- name: 'OhMyZsh : Cloning repo as config dir'
+  git:
+    repo: 'https://github.com/robbyrussell/oh-my-zsh'
+    dest: "~/.oh-my-zsh"
+    force: True
+  tags: ['ohmyzsh']
+
+- name: 'OhMyZsh : Install additional plugins'
+  git:
+    repo: "{{ item }}"
+    dest: "~/.oh-my-zsh/custom/plugins/{{ item.split('/')[-1].split('.')[0] }}"
+  loop: "{{ tools_ohmyzsh_additional_plugins }}"
+  loop_control:
+    label: "{{ item.split('/')[-1] }}"
+  tags: ['ohmyzsh']
+
+- name: 'OhMyZsh : Install config file'
+  template:
+    src: 'zshrc.j2'
+    dest: "~/.zshrc"
+  tags: ['ohmyzsh']
+
+- name: 'OhMyZsh : Ensure user is using zsh shell'
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: '/bin/zsh'
+  become: True
+  tags: ['ohmyzsh']

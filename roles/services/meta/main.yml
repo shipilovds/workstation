@@ -1,0 +1,12 @@
+---
+galaxy_info:
+  role_name: services
+  author: Denis Shipilov <shipilovds@gmail.com>
+  description: Helps to setup system services.
+  platforms:
+    - name: Fedora
+      versions:
+        - 36
+  galaxy_tags:
+    - shadowsocks
+    - proxy

@@ -1,0 +1,40 @@
+---
+- name: 'Gnome Extensions : Install and Setup'
+  shipilovds.workstation.gnome_extension:
+    name: "{{ item.name }}"
+    src: "{{ item.url | default(omit) }}"
+    enabled: "{{ item.enabled | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+    force: True
+  loop: "{{ gnome_extensions }}"
+  loop_control:
+    label: "{{ item['name'].split('@')[0] }}"
+  tags: ['gnome_extensions']
+
+# Bad style but I had no choice
+- name: 'Gnome Extensions : Find extensions gschemas'
+  shell:
+    cmd: 'ls ~/.local/share/gnome-shell/extensions/*/schemas/*.xml'
+  changed_when: False
+  register: _gschemas
+  tags: ['gnome_extensions']
+
+- name: 'Gnome Extensions : Ensure that gschemas are installed'
+  shell:
+    cmd: "cp {{ item }} /usr/share/glib-2.0/schemas/"
+  args:
+    creates: "/usr/share/glib-2.0/schemas/{{ item | split('/') | last }}"
+  become: True
+  register: _gschemas_installation
+  when: _gschemas.stdout_lines|length > 0
+  loop: "{{ _gschemas.stdout_lines }}"
+  loop_control:
+    label: "{{ item | split('/') | last }}"
+  tags: ['gnome_extensions']
+
+- name: 'Gnome Extensions : Compile global gschemas'
+  shell:
+    cmd: 'glib-compile-schemas /usr/share/glib-2.0/schemas/'
+  become: True
+  when: _gschemas.stdout_lines|length > 0 and _gschemas_installation.changed
+  tags: ['gnome_extensions']

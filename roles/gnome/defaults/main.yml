@@ -1,0 +1,26 @@
+---
+gnome_extensions: []
+### Example:
+# gnome_extensions:
+#   - name: 'dash-to-panel@jderose9.github.com'
+#     enabled: True
+#     url: 'https://extensions.gnome.org/extension-data/dash-to-paneljderose9.github.com.v40.shell-extension.zip'
+#   - name: 'apps-menu@gnome-shell-extensions.gcampax.github.com'
+#     enabled: False
+
+gnome_gsettings: {}
+### Example:
+# gnome_gsettings:
+#   org.gnome.desktop.input-sources:
+#     keys:
+#       sources:
+#         - ('xkb', 'us')
+#         - ('xkb', 'ru')
+#   org.gtk.Settings.FileChooser:
+#     keys:
+#       location-mode: 'filename-entry'
+#       sort-directories-first: True
+#   org.gnome.desktop.notifications.application:
+#     path: '/org/gnome/desktop/notifications/application/org-gnome-software/'
+#     keys:
+#       enable: False

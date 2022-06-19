@@ -1,0 +1,46 @@
+---
+- name: 'Neovim : Install system packages'
+  include_role:
+    name: pkgs
+    tasks_from: dnf.yml
+    apply:
+      tags: ['neovim', 'nvim']
+  vars:
+    pkgs_dnf_packages: "{{ tools_neovim_dnf_pkgs }}"
+  tags: ['neovim', 'nvim']
+
+- name: 'Neovim : Install PIP packages'
+  include_role:
+    name: pkgs
+    tasks_from: pip.yml
+    apply:
+      tags: ['neovim', 'nvim']
+  vars:
+    pkgs_pip_packages: "{{ tools_neovim_pip_pkgs }}"
+  tags: ['neovim', 'nvim']
+
+- name: 'Neovim : Check if needed dirs exists'
+  file:
+    state: directory
+    path: "~/{{ item }}"
+  loop:
+    - '.config/nvim/bundle'
+    - '.local/share/nvim/site/pack/git-plugins/start/common'
+  tags: ['neovim', 'nvim']
+
+- name: 'Neovim : Install config file'
+  copy:
+    content: "{{ tools_neovim_init_content }}"
+    dest: '~/.config/nvim/init.vim'
+  when: tools_neovim_init_content
+  tags: ['neovim', 'nvim']
+
+- name: 'Neovim : Install plugins from git'
+  git:
+    repo: "{{ item }}"
+    dest: "~/.local/share/nvim/site/pack/git-plugins/start/{{ item.split('/')[-1].split('.')[0] }}"
+    accept_hostkey: True
+  loop: "{{ tools_neovim_plugins }}"
+  loop_control:
+    label: "{{ item }}"
+  tags: ['neovim', 'nvim']

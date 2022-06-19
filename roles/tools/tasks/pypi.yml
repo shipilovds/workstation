@@ -1,0 +1,13 @@
+---
+- name: 'PyPi : Ensure that ~/.pypirc configuration exists'
+  blockinfile:
+    path: '~/.pypirc'
+    create: True
+    backup: True
+    block: |
+      [pypi]
+        username = __token__
+        password = {{ tools_pypirc_token }}
+      [distutils]
+      index-servers = pypi
+  tags: ['credentials', 'pypi']
